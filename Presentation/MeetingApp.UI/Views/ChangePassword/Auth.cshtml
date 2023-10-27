@@ -1,0 +1,43 @@
+﻿@model ChangePasswordViewModel
+@{
+    ViewData["Title"] = @ViewBag.pageTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div>
+    <h3 class="modal-header">ŞİFREMİ UNUTTUM</h3>
+</div>
+@{
+    @if (Model != null)
+    {
+        <form asp-action="Auth" method="post" class="p-3 mx-auto w-75 shadow">
+            <input asp-for="@Model.returnUrl" class="form-control" type="hidden" />
+            <div class="mb-3">
+                <label>Mevcut Şifre:</label>
+                <span class="text-danger" asp-validation-for="@Model.CurrentPassword"></span>
+                <input asp-for="@Model.CurrentPassword" class="form-control" type="password" />
+            </div>
+            <div class="mb-3">
+                <label>Yeni Şifre:</label>
+                <span class="text-danger" asp-validation-for="@Model.NewPassword"></span>
+                <input asp-for="@Model.NewPassword" class="form-control" type="password" />
+            </div>
+            <div class="mb-3">
+                <label>Yeni Şifre Tekrar:</label>
+                <span class="text-danger" asp-validation-for="@Model.ReNewPassword"></span>
+                <input asp-for="@Model.ReNewPassword" class="form-control" type="password" />
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">DEĞİŞTİR</button>
+            </div>
+            <div class="text-danger mt-4" asp-validation-summary="ModelOnly">
+            </div>
+        </form>
+    }
+    else
+    {
+        <p>Profil bilginiz bulunamadı.</p>
+    }
+}
+

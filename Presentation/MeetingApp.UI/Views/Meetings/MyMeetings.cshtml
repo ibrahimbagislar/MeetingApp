@@ -1,0 +1,90 @@
+﻿@model List<MeetingListDto>
+@{
+    ViewData["Title"] = @ViewBag.pageTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/css/style.css" rel="stylesheet" />
+@{
+    <div>
+        <h3 class="modal-header">TOPLANTILARIN</h3>
+    </div>
+    @if (Model.Count > 0)
+    {
+        <div class="container mt-4 mb-3">
+            <div class="row">
+                @foreach (var item in Model)
+                {
+                    <div class="col-md-4">
+                        <div class="card p-3 mb-2">
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex flex-row align-items-center">
+                                    <div class="icon">
+                                        <i class="fa-solid fa-users-rectangle" style="color: #e11414;"></i>
+                                    </div>
+                                    <div class="ms-2 c-details">
+                                        <h6 class="mb-0">@item.Title - @item.Organizer</h6>
+                                        <span>Toplantı Kodu: @item.MeetingCode</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-2">
+                                <p class="col-form-label">
+                                    @item.Description
+                                    <div class="mt-4">
+                                        <div>
+                                            <a asp-action="Participants" asp-controller="Meetings" asp-route-id="@item.Id" class="btn btn-primary">
+                                                Katılımcıları Gör
+                                            </a>
+                                            <a asp-action="Update" asp-controller="Meetings" asp-route-id="@item.Id" class="btn btn-primary">
+                                                Güncelle
+                                            </a>
+                                            <a asp-action="Remove" asp-controller="Meetings" asp-route-id="@item.Id" class="btn btn-danger">
+                                                Sil
+                                            </a> 
+                                        </div>
+                                        <div class="mt-3">
+                                            @if (item.MeetingDate != null)
+                                            {
+                                                <span>Nihai Toplantı Tarihi:</span>
+                                                <span class="text1">
+                                                    <span class="text2"> @item.MeetingDate?.ToString("dd/MM/yyy HH:mm")</span>
+                                                </span>
+                                                <br>
+                                            }
+                                            else
+                                            {
+                                                <span>Olası Toplantı Tarihleri:</span>
+                                                foreach (var date in item.PossibleDates)
+                                                {
+                                                    <li>
+                                                        <span class="text1">
+                                                            <span class="text2"> @date.ToString("dd/MM/yyy HH:mm")</span>
+                                                        </span>
+                                                    </li>
+                                                }
+                                            }
+                                            <span class="text1">
+                                                @item.Participants?.Count <span class="text2"> kişi kayıt yaptı</span>
+                                            </span>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    }
+    else
+    {
+        <p>TOPLANTI BİLGİSİ BULUNAMADI!</p>
+        <div class="mt-3">
+            <span class="text1">
+                Kayıt yaptırdığın toplantılara
+                <a asp-action="AttendedMeetings" asp-controller="Meetings">göz at</a>
+            </span>
+        </div>
+    }
+}
+

@@ -1,0 +1,20 @@
+﻿using MediatR;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MeetingApp.Application.Features.CQRS.Commands
+{
+    public class UpdateUserCommandRequest : IRequest
+    {
+        public string? Id { get; set; }
+        public string? Name { get; set; }
+        public string? Surname { get; set; }
+        public string? Email { get; set; }
+        public bool ConfirmEmail { get; set; }
+        public int ConfirmCode { get; set; }
+        public string? Password { get; set; }
+    }
+}

@@ -1,0 +1,42 @@
+﻿@model CreateMeetingCommandRequest
+@{
+    ViewData["Title"] = @ViewBag.pageTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <h3 class="modal-header">TOPLANTI OLUŞTUR</h3>
+</div>
+
+<form asp-action="Create" method="post" class="p-3 mx-auto w-75 shadow">
+    <div class="mb-3">
+        <label>Başlık:</label>
+        <span class="text-danger" asp-validation-for="@Model.Title"></span>
+        <input asp-for="@Model.Title" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label>Açıklama:</label>
+        <span class="text-danger" asp-validation-for="@Model.Description"></span>
+        <input asp-for="@Model.Description" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label>Olası Toplantı Tarihi: <span class="opacity-50">1 tarih seçerseniz nihai toplantı tarihi olarak belirlenecektir.</span></label>
+        <span class="text-danger" asp-validation-for="PossibleDates"></span>
+        <input asp-for="PossibleDates" class="form-control" type="datetime-local" />
+    </div>
+    <div class="mb-3" id="possibleDatesContainer">
+        <!-- bu kısım dinamik -->
+    </div>
+    <div class="mb-3">
+        <button type="button" id="addPossibleDateButton" class="btn btn-sm btn-secondary">
+            <i class="fas fa-plus"></i> Olası Tarih Ekle
+        </button>
+    </div>
+
+    <div class="mb-3">
+        <button type="submit" class="btn btn-primary">OLUŞTUR</button>
+    </div>
+    <div class="text-danger mt-4" asp-validation-summary="ModelOnly">
+    </div>
+</form>
+<script src="~/js/addpossibledate.js"></script>

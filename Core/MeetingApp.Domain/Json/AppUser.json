@@ -1,0 +1,29 @@
+[
+  {
+    "Name": "testisim",
+    "Surname": "testsoyisim",
+    "Email": "test@test.com",
+    "ConfirmEmail": true,
+    "ConfirmCode": 0,
+    "Password": "123",
+    "Id": "98ecd609-fe1c-40ce-af12-9cf00aa645e4"
+  },
+  {
+    "Name": "İbrahim",
+    "Surname": "Bağışlar",
+    "Email": "ibrahimbagislar19@gmail.com",
+    "ConfirmEmail": true,
+    "ConfirmCode": 185133,
+    "Password": "ibrahim",
+    "Id": "1"
+  },
+  {
+    "Name": "Mahmut",
+    "Surname": "Test",
+    "Email": "ibrahimbagisla5@gmail.com",
+    "ConfirmEmail": true,
+    "ConfirmCode": 0,
+    "Password": "ibrahim",
+    "Id": "84cd2449-9229-461b-9464-715cf9a795cd"
+  }
+]

@@ -1,0 +1,40 @@
+[
+  {
+    "MeetingCode": "e4d9eeb4-9fdf-488d-ace6-fe50497e3557",
+    "Title": "tst",
+    "Organizer": "İbrahim Bağışlar",
+    "PossibleDates": [
+      "2023-10-25T05:19:00"
+    ],
+    "MeetingDate": "2023-10-25T00:00:00",
+    "CreatedDate": "2023-10-26T22:16:03.5079471Z",
+    "Participants": [],
+    "Description": "tst",
+    "AppUserId": "84cd2449-9229-461b-9464-715cf9a795cd",
+    "Id": "567e322e-e99c-4a70-bd88-a44d8c0325ee"
+  },
+  {
+    "MeetingCode": "479fb58a-f952-4543-b89d-5200112a82f8",
+    "Title": "YENİ TOPLANTI",
+    "Organizer": "İbrahim Bağışlar",
+    "PossibleDates": [
+      "2023-10-27T12:25:00",
+      "2023-10-27T14:25:00"
+    ],
+    "MeetingDate": null,
+    "CreatedDate": "2023-10-26T13:56:45.0553664Z",
+    "Participants": [
+      {
+        "Id": "1",
+        "SelectedDate": "2023-10-27T12:00:00"
+      },
+      {
+        "Id": "84cd2449-9229-461b-9464-715cf9a795cd",
+        "SelectedDate": "2023-10-27T13:00:00"
+      }
+    ],
+    "Description": "Test açıklama.",
+    "AppUserId": "84cd2449-9229-461b-9464-715cf9a795cd",
+    "Id": "479fb58a-f952-4543-b89d-5200112a82f8"
+  }
+]

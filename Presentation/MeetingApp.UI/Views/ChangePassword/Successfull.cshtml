@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewData["Title"] = @ViewBag.pageTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container d-flex justify-content-center align-items-center" style="height: 100vh;">
+    <div style="width: 18rem;">
+        <img class="card-img-top" src="https://i.gifer.com/7efs.gif" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">Şifreniz başarıyla değiştirildi.</h5>
+            <p class="card-text">Birkaç saniye sonra otomatik yönlendirileceksiniz.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    setTimeout(function () {
+        var returnUrl = '@ViewBag.returnUrl'; 
+        if (returnUrl) {
+            window.location.href = returnUrl;
+        }
+    }, 3000);
+</script>

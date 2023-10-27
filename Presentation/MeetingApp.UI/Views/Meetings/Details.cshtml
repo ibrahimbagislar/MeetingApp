@@ -1,0 +1,112 @@
+﻿@model MeetingDetailListModel
+@{
+    ViewData["Title"] = @ViewBag.pageTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/css/detailstyle.css" rel="stylesheet" />
+
+<div class="container">
+    <div class="team-single">
+        <div class="row">
+            <div class="col-lg-8 col-md-7">
+                <form method="post" asp-action="Details" asp-controller="Meetings">
+                    <div class="team-single-text padding-50px-left sm-no-padding-left">
+                        <h3 class="font-size38 sm-font-size32 xs-font-size30">@Model.Title</h3>
+                        <p class="no-margin-bottom">
+                            @Model.Description
+                        </p>
+                        <div class="contact-info-section margin-40px-tb">
+                            <ul class="list-style9 no-margin">
+                                <li>
+                                    <div class="row">
+                                        <div class="col-md-5 col-5">
+                                            <i class="fas fa-user-tie"></i>
+                                            <strong class="margin-10px-left text-orange">Oluşturan:</strong>
+                                        </div>
+                                        <div class="col-md-7 col-7">
+                                            <p>@Model.Organizer</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="row">
+                                        <div class="col-md-5 col-5">
+                                            <i class="fas fa-users text-purple"></i>
+                                            <strong class="margin-10px-left xs-margin-four-left text-purple">Diğer Katılımcılar:</strong>
+                                        </div>
+                                        <div class="col-md-7 col-7">
+                                            <p>
+                                                <a asp-action="Participants" asp-controller="Meetings" asp-route-id="@Model.Id" class="btn btn-sm btn-secondary">
+                                                    Gör
+                                                </a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                                @if (Model.MeetingDate != null)
+                                {
+                                    <li>
+                                        <div class="row">
+                                            <div class="col-md-5 col-5">
+                                                <i class="far fa-calendar-check text-yellow"></i>
+                                                <strong class="margin-10px-left text-yellow">Nihai Toplantı Tarihi</strong>
+                                            </div>
+                                            <div class="col-md-7 col-7">
+                                                
+                                                <select hidden asp-for="SelectedDate" class="form-select">
+                                                <option hidden value="@Model.MeetingDate?.ToString("dd/MM/yyy hh:mm")">@Model.MeetingDate?.ToString("dd/MM/yyy hh:mm")</option>
+                                                </select>
+                                                <p>@Model.MeetingDate</p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+                                else
+                                {
+                                    <li>
+                                        <div class="row">
+                                            <div class="col-md-5 col-5">
+                                                <i class="far fa-calendar-alt text-orange"></i>
+                                                <strong class="margin-10px-left text-orange">
+                                                    Olası Toplantı Tarihleri*
+                                                </strong>
+                                            </div>
+                                            <div class="col-md-7 col-7">
+                                                <select asp-for="SelectedDate" class="form-select">
+                                                    <option class="opacity-75"></option>
+                                                    @foreach (var item in Model.PossibleDates)
+                                                    {
+                                                        <option value="@item.Date.ToString("dd/MM/yyy hh:mm")">@item.Date.ToString("dd/MM/yyy hh:mm")</option>
+                                                    }
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+                                <li>
+                                    <div class="row">
+                                        <div class="col-md-5 col-5">
+                                            <i class="far fa-calendar-check text-orange"></i>
+                                            <strong class="margin-10px-left text-orange">
+                                                Toplantı Kodunu Girin*
+                                            </strong>
+                                        </div>
+                                        <div class="col-md-7 col-7">
+                                            <input asp-for="@Model.MeetingCode" class="form-control" autocomplete="off"/>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="mb-3">
+                                <button type="submit" class="btn btn-primary">Toplantıya Kayıt Ol</button>
+                            </div>
+                            <div class="text-danger mt-4" asp-validation-summary="All">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

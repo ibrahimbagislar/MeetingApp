@@ -1,0 +1,49 @@
+﻿@model UserListDto
+@{
+    ViewData["Title"] = @ViewBag.pageTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div>
+    <h3 class="modal-header">PROFİL</h3>
+</div>
+@{
+    @if (Model != null)
+    {
+        <form asp-action="Index" method="post" class="p-3 mx-auto w-75 shadow">
+            <div class="mb-3">
+                <label>Ad:</label>
+                <span class="text-danger" asp-validation-for="@Model.Name"></span>
+                <input asp-for="@Model.Name" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label>Soyad:</label>
+                <span class="text-danger" asp-validation-for="@Model.Surname"></span>
+                <input asp-for="@Model.Surname" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label>Email:</label>
+                <span class="text-danger" asp-validation-for="@Model.Email"></span>
+                <input disabled="disabled" asp-for="@Model.Email" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label>Değişiklikleri kaydetmek için şifrenizi girin:</label>
+                <span class="text-danger" asp-validation-for="@Model.Password"></span>
+                <input asp-for="@Model.Password" class="form-control" type="password"/>
+            </div>
+            <div class="d-flex flex-column mb-3">
+                <button type="submit" class="btn btn-primary mb-2">GÜNCELLE</button>
+                <a class="btn btn-secondary mb-2" asp-action="Auth" asp-controller="ChangePassword" asp-route-returnUrl="@Context.Request.Path">Şifremi Değiştir</a>
+                <a class="btn btn-secondary mb-2" asp-action="SuccessfullForgotPassword" asp-controller="ChangePassword" asp-route-returnUrl="@Context.Request.Path" asp-route-email="@Model.Email">Şifremi Unuttum</a>
+            </div>
+            <div class="text-danger mt-4" asp-validation-summary="ModelOnly">
+            </div>
+        </form>
+    }
+    else
+    {
+        <p>Profil bilginiz bulunamadı.</p>
+    }
+}
+

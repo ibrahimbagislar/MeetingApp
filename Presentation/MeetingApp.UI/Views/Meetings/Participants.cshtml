@@ -1,0 +1,63 @@
+﻿@model List<ParticipantsListDto>
+@{
+    ViewData["Title"] = @ViewBag.pageTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    <div>
+        <h3 class="modal-header">"@ViewBag.MeetingTitle" TOPLANTISININ KATILIMCILARI</h3>
+    </div>
+    @if (Model.Count > 0)
+    {
+        <div class="container col-md-6:eq(0)" id="tableButtons"></div>
+        <table class="table" id="participants">
+            <thead>
+                <tr>
+                    <th scope="col">Ad</th>
+                    <th scope="col">Soyad</th>
+                    <th scope="col">Seçtiği Tarih</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td scope="row">@item.Name</td>
+                        <td>@item.Surname</td>
+                        <td>@item.SelectedDate?.ToString("dd/MM/yyy HH:mm")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>Henüz toplantıya kimse kayıt yapmadı.</p>
+    }
+}
+
+@section Scripts{
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.bootstrap4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap4.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            var table = $('#participants').DataTable({
+                lengthChange: false,
+                buttons: ['copy', 'excel', 'pdf'],
+            });
+            table.buttons().container().appendTo($('#tableButtons'));
+        });
+    </script>
+}

@@ -1,0 +1,46 @@
+﻿@model CreateUserCommandRequest
+@{
+    ViewData["Title"] = @ViewBag.pageTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div>
+    <h3 class="modal-header">KAYIT OL</h3>
+</div>
+
+<form asp-action="Register" method="post" class="p-3 mx-auto w-75 shadow">
+    <div class="mb-3">
+        <label>Ad:</label>
+        <span class="text-danger" asp-validation-for="@Model.Name"></span>
+        <input asp-for="@Model.Name" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label>Soyad:</label>
+        <span class="text-danger" asp-validation-for="@Model.Surname"></span>
+        <input asp-for="@Model.Surname" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label>Email:</label>
+        <span class="opacity-50">Emailinize doğrulama kodu gelecektir.</span>
+        <span class="text-danger" asp-validation-for="@Model.Email"></span>
+        <input asp-for="@Model.Email" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label>Şifre:</label>
+        <span class="text-danger" asp-validation-for="@Model.Password"></span>
+        <input asp-for="@Model.Password" class="form-control"  type="password"/>
+    </div>
+    <div class="mb-3">
+        <label>Şifre Tekrar:</label>
+        <span class="text-danger" asp-validation-for="@Model.RePassword"></span>
+        <input asp-for="@Model.RePassword" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <button type="submit" class="btn btn-primary">Kayıt Ol</button>
+    </div>
+    <div class="text-danger mt-4" asp-validation-summary="ModelOnly">
+    </div>
+</form>
+
+

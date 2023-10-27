@@ -1,0 +1,29 @@
+﻿@model CheckUserQueryRequest
+@{
+    ViewData["Title"] = @ViewBag.pageTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <h3 class="modal-header">GİRİŞ YAP</h3>
+</div>
+<form asp-action="Login" method="post" class="p-3 mx-auto w-75 shadow">
+    <div class="mb-3">
+        <label>Email:</label>
+        <span class="text-danger" asp-validation-for="@Model.Email"></span>
+        <input asp-for="@Model.Email" class="form-control" />
+    </div>
+    <div class="mb-3">
+        <label>Şifre:</label>
+        <span class="text-danger" asp-validation-for="@Model.Password"></span>
+        <input asp-for="@Model.Password" class="form-control"  type="password"/>
+    </div>
+    <div class="mb-3">
+        <button type="submit" class="btn btn-primary">Giriş Yap</button>
+        <a asp-action="Index" asp-controller="ForgotPassword" asp-route-returnUrl="@Context.Request.Path" class="btn btn-sm btn-secondary">Şifremi Unuttum</a>
+    </div>
+    <div class="text-danger mt-4" asp-validation-summary="ModelOnly">
+    </div>
+</form>
+
+

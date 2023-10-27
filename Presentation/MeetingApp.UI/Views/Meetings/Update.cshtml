@@ -1,0 +1,121 @@
+﻿@model MeetingListDto
+@{
+    ViewData["Title"] = @ViewBag.pageTitle;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <h3 class="modal-header">GÜNCELLE</h3>
+</div>
+@{
+    @if (Model != null)
+    {
+
+        <form asp-action="Update" method="post" class="p-3 mx-auto w-75 shadow">
+            <input asp-for="@Model.Id" class="form-control" type="hidden" />
+            <div class="mb-3">
+                <label>Toplantı Başlığı:</label>
+                <span class="text-danger" asp-validation-for="@Model.Title"></span>
+                <input asp-for="@Model.Title" class="form-control" />
+            </div>
+            <div class="mb-3">
+                <label>Açıklama:</label>
+                <span class="text-danger" asp-validation-for="@Model.Description"></span>
+                <input asp-for="@Model.Description" class="form-control" />
+            </div>
+            @{
+                int index = 1;
+                <span class="opacity-50">1 tarih seçerseniz nihai toplantı tarihi olarak belirlenecektir.</span>
+                @if (Model.MeetingDate != null)
+                {
+                    <div class="mb-3" id="dateDiv@(index)">
+                        <label>
+                            Olası Toplantı Tarihi:
+                            <i class="fas fa-trash" style="cursor: pointer;" onclick="deleteDate(@index)"></i>
+                        </label>
+                        <span class="text-danger" asp-validation-for="PossibleDates"></span>
+                        <input asp-for="@Model.PossibleDates" class="form-control" type="datetime-local" value="@Model.MeetingDate?.Date.ToString("yyyy-MM-dd HH:mm")" />
+                    </div>
+                }
+                else
+                {
+                    @foreach (var date in Model.PossibleDates)
+                    {
+                        <div class="mb-3" id="dateDiv@(index)">
+                            <label>
+                                Olası Toplantı Tarihi:
+                                <i class="fas fa-trash" style="cursor: pointer;" onclick="deleteDate(@index)"></i>
+                            </label>
+                            <span class="text-danger" asp-validation-for="PossibleDates"></span>
+                            <input asp-for="@Model.PossibleDates" class="form-control" type="datetime-local" value="@date.ToString("yyyy-MM-dd HH:mm")" />
+                        </div>
+                        index++;
+                    }
+                }
+
+            }
+            <div class="mb-3" id="possibleDatesContainer">
+                <!-- bu kısım dinamik -->
+            </div>
+            <div class="mb-3">
+                <button type="button" id="addPossibleDateButton" class="btn btn-sm btn-secondary">
+                    <i class="fas fa-plus"></i> Olası Tarih Ekle
+                </button>
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">GÜNCELLE</button>
+            </div>
+            <div class="text-danger mt-4" asp-validation-summary="ModelOnly">
+            </div>
+        </form>
+    }
+    else
+    {
+        <p>Güncellemeye çalıştığınız toplantı sizin değil.</p>
+    }
+}
+
+@section Scripts {
+    <script>
+        document.getElementById("addPossibleDateButton").addEventListener("click", function () {
+            var container = document.getElementById("possibleDatesContainer");
+
+            var newDiv = document.createElement("div");
+            newDiv.className = "mb-3";
+
+            var label = document.createElement("label");
+            label.innerText = "Yeni Olası Toplantı Tarihi: ";
+            label.style.display = "inline-block";
+            newDiv.appendChild(label);
+
+            var trashIcon = document.createElement("i");
+            trashIcon.className = "fa fa-trash";
+            trashIcon.style.cursor = "pointer";
+            trashIcon.addEventListener("click", function () {
+                container.removeChild(newDiv); // tıklanan divi sil
+            });
+            newDiv.appendChild(trashIcon);
+
+            var input = document.createElement("input");
+            input.type = "datetime-local";
+            input.className = "form-control";
+            input.name = "PossibleDates";
+            input.style.display = "inline-block";
+            newDiv.appendChild(input);
+
+            container.appendChild(newDiv);
+        });
+
+
+        function deleteDate(index) {
+            var dateDiv = document.getElementById('dateDiv' + index);
+            if (dateDiv) {
+                dateDiv.remove();
+            }
+        }
+    </script>
+}
+
+
+
+

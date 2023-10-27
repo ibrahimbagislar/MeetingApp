@@ -1,0 +1,99 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>@ViewData["Title"]</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="/assets/images/favicon.ico" />
+    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand me-2" href="/">
+                <img src="https://cdn-icons-png.flaticon.com/512/2913/2913227.png"
+                     height="48"
+                     alt="MDB Logo"
+                     loading="lazy"
+                     style="margin-top: -1px;" />
+            </a>
+            <button class="navbar-toggler"
+                    type="button"
+                    data-mdb-toggle="collapse"
+                    data-mdb-target="#navbarButtonsExample"
+                    aria-controls="navbarButtonsExample"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarButtonsExample">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    @if(User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-action="Index" asp-controller="Profile">Profilim</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-action="AllMeetings" asp-controller="Meetings">Katılabileceğim Toplantılar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-action="AttendedMeetings" asp-controller="Meetings">Katıldığım Toplantılar</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-action="MyMeetings" asp-controller="Meetings">Toplantılarım</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-action="Create" asp-controller="Meetings">Toplantı Oluştur</a>
+                        </li>
+                    }
+                </ul>
+                <div class="d-flex align-items-center">
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <a type="button" class="btn btn-link px-3 me-2" asp-action="Login" asp-controller="Auth">
+                            Giriş Yap
+                        </a>
+                        <a type="button" class="btn btn-primary me-3" asp-action="Register" asp-controller="Auth">
+                            Kayıt Ol
+                        </a>
+                    }
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a type="button" class="btn btn-primary me-3" asp-action="Logout" asp-controller="Auth">
+                            Çıkış Yap
+                        </a>
+                    }
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar -->
+    <div class="container mt-3 mb-3">
+        @RenderBody()
+    </div>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script>
+        // js ile navbar butonunu kontrol etme
+        document.addEventListener("DOMContentLoaded", function () {
+            const navbarToggler = document.querySelector(".navbar-toggler");
+            const navbarCollapse = document.querySelector(".navbar-collapse");
+
+            navbarToggler.addEventListener("click", function () {
+                // navbar butona tıklanıldığında navbarı aç veya kapat
+                if (navbarCollapse.classList.contains("show")) {
+                    navbarCollapse.classList.remove("show");
+                } else {
+                    navbarCollapse.classList.add("show");
+                }
+            });
+        });
+    </script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
